@@ -6,23 +6,22 @@ sample_array2 = [1,2,3,4, 5]
 
 ExampleTree = Tree.new([1,2,3,4,5])
 
-# ExampleTree.insertE(3)
-# ExampleTree.insertE(2)
-# ExampleTree.insertE(5)
-# ExampleTree.insertE(4)
-# ExampleTree.insertE(6)
-# ExampleTree.insertE(7)
+# ExampleTree.insert(3)
+# ExampleTree.insert(2)
+# ExampleTree.insert(5)
+# ExampleTree.insert(4)
+# ExampleTree.insert(6)
+# ExampleTree.insert(7)
 
 sample_array2.each do |element|
-    ExampleTree.insertE(element)
+    ExampleTree.insert(element)
 end
 
-# ExampleTree.insertE(4)
-# ExampleTree.insertE(2)
-# ExampleTree.insertE(3)
+# ExampleTree.insert(4)
+# ExampleTree.insert(2)
+# ExampleTree.insert(3)
 
-
-
+puts ExampleTree.find(6).to_json
 # puts ExampleTree.root.to_json
 # puts ExampleTree.root.right.to_json
 # puts ExampleTree.root.left.to_json

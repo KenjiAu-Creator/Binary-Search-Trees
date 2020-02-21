@@ -12,18 +12,8 @@ class Tree
     @array = array
     @root = Node.new(nil)
   end
-
-  def insert(parent_node, child_value)
-    child = Node.new(child_value)
-    child.parent(parent_node)
-    if parent_node > child
-      parent_node.left_child = child
-    elsif parent_node < child
-      parent_node.right_child = child
-    end
-  end
   
-  def insertE(val)
+  def insert(val)
     y = Node.new(nil)
     z = Node.new(val)
     x = @root
@@ -60,60 +50,6 @@ class Tree
 
   end
 
-=begin
-  def insert_fix(z)
-    while z.parent.color == RED
-      if z.parent == z.parent.parent.left
-        y = z.parent.parent.right
-        if y.color == RED
-          z.parent.color = BLACK
-          y.color = BLACK
-          
-          z.parent.parent.color = RED
-
-          z = z.parent.parent
-          right_rotate(z.parent)
-
-          y = z.parent
-          w = z.right
-
-          z.parent = z.parent.parent
-
-          y.parent = z
-          y.left = w
-
-        elsif z == z.parent.right
-          z = z.parent
-
-          y = z.parent
-          w = z
-          x  = z.left
-
-          w.left = y
-          y.right = x
-
-          z.color = BLACK
-          z.left.color = RED
-
-        elsif z == z.parent.left
-          z = z.parent
-          y = z.parent
-          w = z.left
-
-          y.parent = z
-
-          z.color = black
-          y.color = red
-
-        else
-            @root.color = black
-        end
-      end
-    end
-  end
-
-=end
-
   def rebalance(z)
     while (z.get_parent.color == "red" || @root.color == "red")
       # Make sure the grandparent exists. If it doesn't we are at the root or first tier.
@@ -135,7 +71,7 @@ class Tree
                 # RIGHT ROTATE METHOD
                 z.get_parent.flip_color
                 z.get_uncle.flip_color
-                z.get_parent.get_parent.rotate_right2
+                z.get_parent.get_parent.rotate_right
                 z = z.get_parent.get_parent
               end
             else
@@ -148,7 +84,7 @@ class Tree
 
               z.get_parent.flip_color
               z.get_parent.get_parent.flip_color
-              z.get_parent.get_parent.rotate_right2
+              z.get_parent.get_parent.rotate_right
 
               z = z.get_parent
             end
@@ -169,7 +105,7 @@ class Tree
             else
               # Uncle is nil -> Treat as black
               # Case 2
-              z.get_parent.rotate_left2
+              z.get_parent.rotate_left
               z = z.left
             end
           end
@@ -191,7 +127,7 @@ class Tree
                 z.parent.flip_color
                 z.get_parent.get_parent.flip_color
                 z.get_uncle.flip_color
-                z.parent.rotate_left2
+                z.parent.rotate_left
                 z = z.get_parent
               end
             else
@@ -204,8 +140,7 @@ class Tree
               z.parent.flip_color
               z.get_parent.get_parent.flip_color
 
-              z.get_parent.get_parent.rotate_left2
-              puts @root.to_json
+              z.get_parent.get_parent.rotate_left
               
               z = z.get_parent
             end
@@ -225,7 +160,7 @@ class Tree
               # Uncle is nil - > treat as black
               # CASE 2
               # Right rotate on z.parent
-              z.get_parent.rotate_right2
+              z.get_parent.rotate_right
               z = z.right
             end
           end
@@ -235,5 +170,24 @@ class Tree
         @root.set_color("black")
       end
     end
+  end
+
+  def find(value)
+    current_node = @root
+    while !(current_node.value == value)
+      if value < current_node.value
+        current_node = current_node.left
+      else
+        current_node = current_node.right
+      end
+
+      if current_node.nil?
+        puts "#{value} is not in the tree"
+        return
+      end
+    end
+    
+    puts "Node found"
+    return current_node
   end
 end
