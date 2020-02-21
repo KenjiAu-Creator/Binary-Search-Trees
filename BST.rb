@@ -1,5 +1,5 @@
-require './node3.rb'
-require './tree3.rb'
+require './node.rb'
+require './tree.rb'
 
 sample_array = [1, 7, 4, 23, 8, 9, 4, 3, 5 ,7, 9, 67, 6345, 423]
 sample_array2 = [1,2,3,4, 5]
