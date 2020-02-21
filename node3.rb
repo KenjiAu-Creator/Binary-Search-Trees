@@ -81,7 +81,11 @@ class Node
   end
 
   def rotate_right2
-    @parent.right = @left
+    if (self == @parent.right)
+      @parent.right = @left
+    elsif (self == @parent.left)
+      @parent.left = @left
+    end 
     @left.parent_node(@parent)
     @parent = @left
     @left = @left.right
@@ -90,7 +94,11 @@ class Node
   end
   
   def rotate_left2
-    @parent.left = @right
+    if (self == @parent.left)
+      @parent.left = @right
+    elsif (self == @parent.right)
+      @parent.right = @right
+    end
     @right.parent = @parent
     @parent = @right
     @right = @right.left
